@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView x:Class="ArcTouch.TestApp.Views.Common.Rating"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:rating="clr-namespace:Syncfusion.SfRating.XForms;assembly=Syncfusion.SfRating.XForms">
+
+	<ContentView.Content>
+		<rating:SfRating x:Name="rating"
+		                 ItemCount="10"
+		                 ItemSize="8"
+		                 ItemSpacing="4"
+		                 Precision="Half"
+		                 ReadOnly="true"
+		                 TooltipPlacement="TopLeft"
+		                 Value="{Binding RatingValue}">
+			<rating:SfRating.RatingSettings>
+				<rating:SfRatingSettings RatedStroke="Red" />
+			</rating:SfRating.RatingSettings>
+		</rating:SfRating>
+	</ContentView.Content>
+
+</ContentView>
+
+
+
+

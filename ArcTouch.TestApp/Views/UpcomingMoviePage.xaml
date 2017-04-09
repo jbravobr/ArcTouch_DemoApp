@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage x:Class="ArcTouch.TestApp.Views.UpcomingMoviePage"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+             xmlns:converters="clr-namespace:ArcTouch.TestApp"
+             xmlns:infinite="clr-namespace:ArcTouch.TestApp;assembly=ArcTouch.TestApp"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:templates="clr-namespace:ArcTouch.TestApp.Views.Templates;assembly=ArcTouch.TestApp"
+             Title="Upcoming"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             BackgroundColor="{x:Static infinite:Styles.MainWrapperBackgroundColor}">
+	<ContentPage.Resources>
+		<ResourceDictionary>
+			<converters:TextChangedEventArgsToTextChangedConverter x:Key="TextChangedConverter" />
+		</ResourceDictionary>
+	</ContentPage.Resources>
+	<ContentPage.Content>
+		<StackLayout>
+			<SearchBar x:Name="searchbar"
+			           Placeholder="Search for a movie..."
+			           SearchCommand="{Binding SearchMovieCommand}"
+			           SearchCommandParameter="{Binding Source={x:Reference searchbar},
+			                                            Path=Text}">
+				<SearchBar.Behaviors>
+					<converters:EventToCommandBehavior Command="{Binding SearchMovieCommand}"
+					                                   Converter="{StaticResource TextChangedConverter}"
+					                                   EventName="TextChanged" />
+				</SearchBar.Behaviors>
+			</SearchBar>
+			<infinite:InfiniteListView x:Name="listViewMovies"
+			                           HasUnevenRows="true"
+			                           ItemsSource="{Binding Movies}"
+			                           LoadMoreCommand="{Binding GetMoreItensCommand}"
+			                           SeparatorVisibility="None">
+				<x:Arguments>
+					<ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
+				</x:Arguments>
+				<infinite:InfiniteListView.Behaviors>
+					<b:EventToCommandBehavior Command="{Binding ItemTappedCommand}"
+					                          EventArgsParameterPath="Item"
+					                          EventName="ItemTapped" />
+				</infinite:InfiniteListView.Behaviors>
+				<infinite:InfiniteListView.ItemTemplate>
+					<DataTemplate>
+						<ViewCell>
+							<templates:UpcomingMovieItemTemplate />
+						</ViewCell>
+					</DataTemplate>
+				</infinite:InfiniteListView.ItemTemplate>
+			</infinite:InfiniteListView>
+		</StackLayout>
+	</ContentPage.Content>
+</ContentPage>
