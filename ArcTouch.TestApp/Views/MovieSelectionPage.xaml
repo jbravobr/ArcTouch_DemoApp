@@ -1,0 +1,122 @@
+<ContentPage x:Class="ArcTouch.TestApp.Views.MovieSelectionPage"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:common="clr-namespace:ArcTouch.TestApp.Views.Common;assembly=ArcTouch.TestApp"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             xmlns:rating="clr-namespace:Syncfusion.SfRating.XForms;assembly=Syncfusion.SfRating.XForms"
+             xmlns:styles="clr-namespace:ArcTouch.TestApp;assembly=ArcTouch.TestApp"
+             Title="Details"
+             BackgroundColor="{x:Static styles:Styles.BasePageColor}">
+
+	<ContentPage.Content>
+		<ScrollView Padding="20,20,20,0">
+			<Grid RowSpacing="5">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="200" />
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
+				</Grid.RowDefinitions>
+
+				<!--  MOVIE BLUR BACKGROUND  -->
+				<ffimageloading:CachedImage Grid.Row="0"
+				                            Margin="-20,-20,-20,0"
+				                            HeightRequest="100"
+				                            Aspect="AspectFill"
+				                            BackgroundColor="Black"
+				                            FadeAnimationEnabled="true"
+				                            Opacity="1"
+				                            Source="{Binding Movie.FullImagePath}">
+					<ffimageloading:CachedImage.Transformations>
+						<fftransformations:BlurredTransformation Radius="20" />
+					</ffimageloading:CachedImage.Transformations>
+				</ffimageloading:CachedImage>
+
+				<!--  MOVIE PICTURE  -->
+				<ffimageloading:CachedImage Grid.Row="0"
+				                            Margin="0,-20,0,20"
+				                            HeightRequest="150"
+				                            HorizontalOptions="Center"
+				                            VerticalOptions="Center"
+				                            Aspect="AspectFit"
+				                            FadeAnimationEnabled="true"
+				                            Source="{Binding Movie.FullImagePath}" />
+				<!--   BUTTON PLAY   -->
+				<Button WidthRequest="200"
+				        HorizontalOptions="Center"
+				        VerticalOptions="End"
+				        Command="{Binding OnMovieTapped}"
+				        Style="{x:Static styles:Styles.PrimaryActionButtonStyle}"
+				        Text="Play Movie"
+				        TranslationY="22" />
+
+				<!--  DETAILS  -->
+				<StackLayout Grid.Row="1" Margin="0,30,0,0">
+
+					<!--  TITLE  -->
+					<Label Margin="0,5"
+					       FontAttributes="Bold"
+					       FontSize="22"
+					       Text="{Binding Movie.OriginalTitle}"
+					       TextColor="{x:Static styles:Styles.AccentColor}" />
+
+					<!--  MOVIE DATA  -->
+					<StackLayout VerticalOptions="Center" Orientation="Horizontal">
+						<Label FontAttributes="Bold"
+						       FontSize="14"
+						       Text="{Binding Movie.ReleaseDateFormattedString}" />
+					</StackLayout>
+
+					<!--  RATING  -->
+					<rating:SfRating x:Name="rating"
+					                 Grid.Row="3"
+					                 ItemCount="10"
+					                 ItemSize="15"
+					                 ItemSpacing="4"
+					                 Precision="Half"
+					                 ReadOnly="true"
+					                 TooltipPlacement="TopLeft"
+					                 Value="{Binding Movie.VoteAverage}">
+					</rating:SfRating>
+
+					<!--  DESCRIPTION  -->
+					<Label Grid.Row="4"
+					       FontSize="12"
+					       Text="{Binding Movie.Overview}" />
+
+					<!--  GENRES  -->
+					<Grid Grid.Row="5">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="Auto" />
+							<ColumnDefinition Width="*" />
+						</Grid.ColumnDefinitions>
+
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="Auto" />
+						</Grid.RowDefinitions>
+
+						<common:RoundedLabel Grid.Row="0"
+						                     Grid.Column="0"
+						                     VerticalOptions="Start"
+						                     RoundedLabelBackgroundColor="{x:Static styles:Styles.ComplementColor}"
+						                     RoundedLabelCornerRadius="4"
+						                     RoundedLabelFontSize="10"
+						                     RoundedLabelPadding="6,0"
+						                     RoundedLabelText="GENRES:"
+						                     RoundedLabelTextColor="White"
+						                     TranslationY="2" />
+
+						<Label Grid.Row="0"
+						       Grid.Column="1"
+						       VerticalOptions="FillAndExpand"
+						       FontSize="10"
+						       Text="{Binding Movie.GenresFormattedString}" />
+
+					</Grid>
+				</StackLayout>
+			</Grid>
+		</ScrollView>
+	</ContentPage.Content>
+
+</ContentPage>

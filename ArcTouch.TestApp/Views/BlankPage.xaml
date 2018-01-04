@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage x:Class="ArcTouch.TestApp.Views.BlankPage"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:lottie="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:styles="clr-namespace:ArcTouch.TestApp;assembly=ArcTouch.TestApp"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             BackgroundColor="{x:Static styles:Styles.DarkBackgroundColor}">
+	<StackLayout VerticalOptions="FillAndExpand" Padding="0,50,0,0">
+		<lottie:AnimationView Grid.Row="1"
+		                      HorizontalOptions="FillAndExpand"
+		                      VerticalOptions="FillAndExpand"
+		                      Animation="countdown.json"
+		                      AutoPlay="True"
+		                      Loop="True" />
+	</StackLayout>
+</ContentPage>

@@ -1,0 +1,94 @@
+<ContentView x:Class="ArcTouch.TestApp.Views.Templates.UpcomingMovieItemTemplate"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:common="clr-namespace:ArcTouch.TestApp.Views.Common;assembly=ArcTouch.TestApp"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:styles="clr-namespace:ArcTouch.TestApp;assembly=ArcTouch.TestApp"
+             BackgroundColor="{x:Static styles:Styles.MainWrapperBackgroundColor}"
+             Padding="10">
+
+	<Grid VerticalOptions="Center">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+		</Grid.RowDefinitions>
+
+		<!--  PRODUCT  -->
+		<Grid Grid.Row="0"
+		      Grid.Column="0"
+		      BackgroundColor="{x:Static styles:Styles.BasePageColor}"
+		      ColumnSpacing="10"
+		      Padding="10,10,20,10"
+		      RowSpacing="10">
+
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="100" />
+				<ColumnDefinition Width="*" />
+			</Grid.ColumnDefinitions>
+
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+			</Grid.RowDefinitions>
+
+			<!--  MOVIE IMAGE  -->
+			<ffimageloading:CachedImage Grid.Row="0"
+			                            Grid.RowSpan="3"
+			                            HeightRequest="100"
+			                            Aspect="AspectFit"
+			                            FadeAnimationEnabled="true"
+			                            Source="{Binding FullImagePath}" />
+
+			<!--  MOVIE NAME  -->
+			<Label Grid.Row="0"
+			       Grid.Column="1"
+			       Grid.ColumnSpan="2"
+			       FontAttributes="Bold"
+			       FontSize="14"
+			       HorizontalTextAlignment="Start"
+			       Text="{Binding OriginalTitle}"
+			       TextColor="{x:Static styles:Styles.BaseTextColor}"
+			       VerticalTextAlignment="Center" />
+
+			<!--  GENRES  -->
+			<StackLayout Grid.Row="1"
+			             Grid.Column="1"
+			             Grid.ColumnSpan="2"
+			             Orientation="Horizontal">
+
+				<common:RoundedLabel VerticalOptions="Center"
+				                     RoundedLabelBackgroundColor="{x:Static styles:Styles.ComplementColor}"
+				                     RoundedLabelCornerRadius="4"
+				                     RoundedLabelFontSize="9"
+				                     RoundedLabelPadding="6,0"
+				                     RoundedLabelText="GENRES:"
+				                     RoundedLabelTextColor="White" />
+
+				<Label FontSize="12"
+				       LineBreakMode="TailTruncation"
+				       Text="{Binding GenresFormattedString}"
+				       TextColor="{x:Static styles:Styles.BaseTextColor}"
+				       VerticalTextAlignment="Center" />
+
+			</StackLayout>
+
+			<StackLayout Grid.Row="2"
+			             Grid.Column="1"
+			             Grid.ColumnSpan="2"
+			             Orientation="Horizontal">
+				<common:RoundedLabel VerticalOptions="Center"
+				                     RoundedLabelBackgroundColor="{x:Static styles:Styles.ComplementColor}"
+				                     RoundedLabelCornerRadius="4"
+				                     RoundedLabelFontSize="9"
+				                     RoundedLabelPadding="6,0"
+				                     RoundedLabelText="RELEASE DATE:"
+				                     RoundedLabelTextColor="White" />
+				<Label FontSize="12"
+				       Text="{Binding ReleaseDateFormattedString}"
+				       TextColor="{x:Static styles:Styles.BaseTextColor}"
+				       VerticalTextAlignment="Center" />
+			</StackLayout>
+		</Grid>
+	</Grid>
+
+</ContentView>
